@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'check_osx_mem' target in the 'check_osx_mem' project.
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

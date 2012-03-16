@@ -1,0 +1,164 @@
+// !$*UTF8*$!
+{
+	0419064013862DEB007FB1D0 /* check_osx_mem.m:106 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 08FB7796FE84155DC02AAC07 /* check_osx_mem.m */;
+		functionName = "main()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 106;
+		modificationTime = 327561740.423528;
+		state = 0;
+	};
+	041906711386321E007FB1D0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* check_osx_mem.m */;
+		name = "check_osx_mem.m: 128";
+		rLen = 0;
+		rLoc = 4598;
+		rType = 0;
+		vrLen = 947;
+		vrLoc = 3651;
+	};
+	041A04F41512CCF6008AB8B2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* check_osx_mem.m */;
+		name = "check_osx_mem.m: 129";
+		rLen = 0;
+		rLoc = 4598;
+		rType = 0;
+		vrLen = 1650;
+		vrLoc = 0;
+	};
+	04B5E45A1386168F00A80C15 /* check_osx_mem */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = check_osx_mem;
+		savedGlobals = {
+		};
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	04B5E465138616A200A80C15 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	04B5E466138616A200A80C15 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	08FB7793FE84155DC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 04B5E45A1386168F00A80C15 /* check_osx_mem */;
+		activeSDKPreference = macosx10.5;
+		activeTarget = 8DD76F960486AA7600D96B5E /* check_osx_mem */;
+		breakpoints = (
+			0419064013862DEB007FB1D0 /* check_osx_mem.m:106 */,
+		);
+		codeSenseManager = 04B5E466138616A200A80C15 /* Code sense */;
+		executables = (
+			04B5E45A1386168F00A80C15 /* check_osx_mem */,
+		);
+		perUserDictionary = {
+			"PBXConfiguration.PBXBreakpointsDataSource.v1:1CA1AED706398EBD00589147" = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXBreakpointsDataSource_BreakpointID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					20,
+					198,
+					20,
+					99,
+					99,
+					29,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXBreakpointsDataSource_ActionID,
+					PBXBreakpointsDataSource_TypeID,
+					PBXBreakpointsDataSource_BreakpointID,
+					PBXBreakpointsDataSource_UseID,
+					PBXBreakpointsDataSource_LocationID,
+					PBXBreakpointsDataSource_ConditionID,
+					PBXBreakpointsDataSource_IgnoreCountID,
+					PBXBreakpointsDataSource_ContinueID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1084,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 353553617;
+			PBXWorkspaceStateSaveDate = 353553617;
+		};
+		perUserProjectItems = {
+			041906711386321E007FB1D0 /* PBXTextBookmark */ = 041906711386321E007FB1D0 /* PBXTextBookmark */;
+			041A04F41512CCF6008AB8B2 /* PBXTextBookmark */ = 041A04F41512CCF6008AB8B2 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 04B5E465138616A200A80C15 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	08FB7796FE84155DC02AAC07 /* check_osx_mem.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1262, 1806}}";
+			sepNavSelRange = "{4598, 0}";
+			sepNavVisRange = "{0, 1650}";
+		};
+	};
+	8DD76F960486AA7600D96B5E /* check_osx_mem */ = {
+		activeExec = 0;
+		executables = (
+			04B5E45A1386168F00A80C15 /* check_osx_mem */,
+		);
+	};
+}

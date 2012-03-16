@@ -1,0 +1,10 @@
+check_osx_mem
+by Jedda Wignall
+http://jedda.me
+
+v1.0 - 12 Mar 2012
+Initial release.
+
+Tool to report OSX memory utilization to nagios and Groundwork server.
+Requires -w and -c values as percentage utilization. Returns lots of performance data.
+./check_osx_mem -w 65.00 -c 85.00
