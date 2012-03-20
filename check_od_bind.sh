@@ -15,9 +15,9 @@
 
 if echo `id $1` | grep -q "uid"
 	then
-  		printf "$1 was id'd successfully\n"
+  		printf "OK - $1 was id'd successfully\n"
   		exit 0
 	else
-  		printf "Could not id $1\n"
+  		printf "CRITICAL - Could not id $1\n"
 		exit 2
 fi

@@ -21,10 +21,10 @@ smartoncmd=`/opt/local/libexec/nagios/smartctl --smart=on $1`
 # run smartctl on disk and report on output
 if echo `/opt/local/libexec/nagios/smartctl -H $1` | grep -q "PASSED"
 	then
-  		printf "SMART - Passed\n"
+  		printf "OK - SMART Passed\n"
   		exit 0
 	else
-        printf "SMART - FAILURE!\n"
+        printf "WARNING - SMART FAILURE!\n"
 		exit 1
 fi
 

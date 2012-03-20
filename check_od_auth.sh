@@ -14,9 +14,9 @@
 # 	We use this on our OD master to ensure auth is up, and that password server and slapd are happy.
 
 if dscl /LDAPv3/127.0.0.1 -authonly $1 $2; then
-	printf "OD authentication succeeded.";
+	printf "OK - OD authentication succeeded.";
 	exit 0
 else
-	printf "OD authentication FAILED!";
+	printf "CRITICAL - OD authentication FAILED!";
 	exit 2
 fi
