@@ -1,1 +1,3 @@
-A bunch of scripts and tools to monitor Mac OS X server & client with Nagios & Groundwork Monitor.
+A collection of scripts and tools to assist in monitoring Mac OS X with Nagios.
+
+For the most part, these were specifically designed to be dependency free, so in the case of all but one or two, they should run on a stock 10.5-10.7 install.
