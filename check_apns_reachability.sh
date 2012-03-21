@@ -4,6 +4,9 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+#	v1.1 - 21 Mar 2012
+#	Added check of x.courier.push.apple.com:5223
+
 #	v1.0 - 20 Mar 2012
 #	Initial release.
 
