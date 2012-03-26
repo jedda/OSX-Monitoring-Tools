@@ -43,6 +43,7 @@ login=`curl --cookie /tmp/tempcookies --cookie-jar /tmp/tempcookies -k -X POST -
 ' -silent $kerioAdminURL'/admin/api/jsonrpc'`
 token=`echo $login | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w token | awk -F '|' '{ print $3 }'`
 reset=`curl --cookie /tmp/tempcookies -k -X POST -H "Content-type: application/json" -H "X-Token: $token" -d '{"jsonrpc":"2.0","id":1,"method":"Statistics.reset","params":{}}' -silent $kerioAdminURL'/admin/api/jsonrpc'`
+logout=`curl --cookie /tmp/tempcookies -k -X POST -H "Content-type: application/json" -H "X-Token: $token" -d '{"jsonrpc": "2.0","id": 1, "method": "Session.logout"}' -silent $kerioAdminURL'/admin/api/jsonrpc'`
 }
 
 nameList=""
