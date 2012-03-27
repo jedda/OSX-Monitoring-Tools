@@ -43,6 +43,7 @@ login=`curl --cookie /tmp/tempcookies --cookie-jar /tmp/tempcookies -k -X POST -
 ' -silent $kerioAdminURL'/admin/api/jsonrpc'`
 token=`echo $login | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w token | awk -F '|' '{ print $3 }'`
 reset=`curl --cookie /tmp/tempcookies -k -X POST -H "Content-type: application/json" -H "X-Token: $token" -d '{"jsonrpc":"2.0","id":1,"method":"Statistics.reset","params":{}}' -silent $kerioAdminURL'/admin/api/jsonrpc'`
+sleep 3
 logout=`curl --cookie /tmp/tempcookies -k -X POST -H "Content-type: application/json" -H "X-Token: $token" -d '{"jsonrpc": "2.0","id": 1, "method": "Session.logout"}' -silent $kerioAdminURL'/admin/api/jsonrpc'`
 }
 
@@ -76,17 +77,17 @@ do
 	i=$((i+1))
 done
 
+resetKerioStatistics &
+sleep 2
+
 if [ "$critString" != "" ]; then
 	printf "$critString | $performance\n"
-	resetKerioStatistics
 	exit 2
 elif [ "$warnString" != "" ]; then
 	printf "$warnString | $performance\n"
-	resetKerioStatistics
 	exit 1
 else
 	printf "OK | $performance\n"
-	resetKerioStatistics
 	exit 0
 fi
 
