@@ -4,6 +4,9 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+#	v1.1 - 27 Mar 2012
+#	Added some timing padding to ensure reset occurs.
+
 #	v1.0 - 26 Mar 2012
 #	Initial release.
 
