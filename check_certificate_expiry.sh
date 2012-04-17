@@ -40,4 +40,4 @@ done
 
 # all certificates passed testing. return OK status.
 printf "OK - Certificates are valid.\n"
-exit 1
+exit 0
