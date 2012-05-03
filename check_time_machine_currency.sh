@@ -42,4 +42,4 @@ elif [ "$diff" -gt "$warnSeconds" ]; then
 fi
 
 printf "OK - A Time Machine backup has been taken within the last $warnMinutes minutes.\n"
-exit 1
+exit 0

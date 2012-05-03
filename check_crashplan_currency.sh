@@ -4,8 +4,16 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+
+#	v1.0.1 - 3 May 2012
+#	Added comments and fixed broken bits.
+
 #	v1.0 - 27 Apr 2012
 #	Initial release.
+
+#	This script checks the currency of a CrashPlan backup on Mac OS X. There is a different version for linux due to differences between date on BSD and GNU.
+#	Takes three arguments ([-d] cp.properties file in backup destination, [-w] warning threshold in minutes, [-c] critical threshold in minutes):
+#	./check_crashplan_currency_gnu.sh -d /Volumes/Backups/52352423423424243/cp.properties -w 240 -c 1440
 
 currentDate=`date "+%s"`
 cpDirectory=""
@@ -46,4 +54,4 @@ elif [ "$diff" -gt "$warnSeconds" ]; then
 fi
 
 printf "OK - $cpDirectory has been backed up within the last $warnMinutes minutes.\n"
-exit 1
+exit 0
