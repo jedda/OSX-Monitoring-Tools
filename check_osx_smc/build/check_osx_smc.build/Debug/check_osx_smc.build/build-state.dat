@@ -1,0 +1,144 @@
+Tcheck_osx_smc
+v4
+r1
+cCheck dependencies
+cCompileC build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc normal x86_64
+
+N/Developer/SDKs/MacOSX10.7.sdk
+c000000004E7AD70B00000000000000EE
+t1316673291
+s238
+
+N/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/IOKit.framework/IOKit
+c000000004E7AD7030000000000039ED8
+t1316673283
+s237272
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc
+t1336705867
+s9700
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/i386/check_osx_smc.LinkFileList
+c000000004FAC7A3600000000000000AF
+t1336703542
+s175
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/i386/check_osx_smc.o
+t1336703542
+s2780
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.LinkFileList
+c000000004FAC795200000000000000B1
+t1336703314
+s177
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.o
+t1336705867
+s3888
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/hg.o
+t2
+s0
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/main.o
+t2
+s0
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c
+c000000004FAC835D00000000000004FB
+t1336705885
+s1275
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/hg.m
+c000000004FAC785D00000000000000C2
+t1336703069
+s194
+
+N/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/main.c
+c000000004FAC77940000000000000126
+t1336702868
+s294
+
+CBuild AST from /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c
+r0
+
+CBuild AST from /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/hg.m
+r0
+
+CBuild AST from /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/main.c
+r0
+
+CCheck dependencies
+r0
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesc284d1deba5cb541^236be9deba5cb541^---0#1#0#--18"Check dependencies36"D81A3B05-74AA-41CE-B433-969AF25B903A-
+
+CCompileC build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/i386/check_osx_smc.o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
+s358396342.574417
+e358396342.740722
+r1
+xCompileC
+xbuild/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/i386/check_osx_smc.o
+x/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c:20:19: warning: unused variable 'device' [-Wunused-variable,12]
+o     io_object_t   device;
+o                   ^
+o1 warning generated.
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection124"Compile /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c802993b6b15cb541^4980beb6b15cb541^-250"/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c:20:19: warning: unused variable 'device' [-Wunused-variable,12]     io_object_t   device;                   ^1 warning generated.1(21%IDEActivityLogMessage2@24"Unused variable 'device'-358396342#0#181#-1#-23%DVTTextDocumentLocation3@132"file://localhost/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c0000000000000000^19#18#19#18#18446744073709551615#0#19"Unused Entity Issue--0#0#0#-19%DVTDocumentLocation4@132"file://localhost/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c0000000000000000^2522"CompileC build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/i386/check_osx_smc.o check_osx_smc/check_osx_smc.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c -arch i386 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wmissing-prototypes -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG=1 -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -Wno-sign-conversion -iquote /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/check_osx_smc-generated-files.hmap -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/check_osx_smc-own-target-headers.hmap -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/check_osx_smc-all-target-headers.hmap -iquote /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/check_osx_smc-project-headers.hmap -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/include -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/DerivedSources/i386 -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/DerivedSources -F/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug -MMD -MT dependencies -MF /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/i386/check_osx_smc.d -c /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c -o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/i386/check_osx_smc.o36"9C3BF4CB-08EE-4E7A-8D33-19347C64BE5D-
+
+CCompileC build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s358398686.887296
+e358398687.057813
+r1
+xCompileC
+xbuild/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.o
+x/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c:15:21: warning: unused variable 'connect' [-Wunused-variable,12]
+o static io_connect_t connect;
+o                     ^
+o1 warning generated.
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection124"Compile /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c9148e3deba5cb541^f9d71adfba5cb541^-256"/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c:15:21: warning: unused variable 'connect' [-Wunused-variable,12] static io_connect_t connect;                     ^1 warning generated.1(21%IDEActivityLogMessage2@25"Unused variable 'connect'-358398687#0#182#-1#-23%DVTTextDocumentLocation3@132"file://localhost/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c0000000000000000^14#20#14#20#18446744073709551615#0#19"Unused Entity Issue--0#0#0#-19%DVTDocumentLocation4@132"file://localhost/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c0000000000000000^2534"CompileC build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.o check_osx_smc/check_osx_smc.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wmissing-prototypes -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG=1 -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -Wno-sign-conversion -iquote /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/check_osx_smc-generated-files.hmap -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/check_osx_smc-own-target-headers.hmap -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/check_osx_smc-all-target-headers.hmap -iquote /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/check_osx_smc-project-headers.hmap -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/include -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/DerivedSources/x86_64 -I/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/DerivedSources -F/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug -MMD -MT dependencies -MF /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.d -c /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/check_osx_smc.c -o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.o36"B71E4BFB-614F-404D-BB1C-FEFB080DC77F-
+
+CCompileC build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/hg.o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/hg.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/main.o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/check_osx_smc/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CLd /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc normal i386
+s358396342.747761
+e358396342.877055
+r0
+xLd
+x/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc
+xnormal
+xi386
+oUndefined symbols for architecture i386:
+o  "_IOMasterPort", referenced from:
+o      _main in check_osx_smc.o
+o  "_IOServiceMatching", referenced from:
+o      _main in check_osx_smc.o
+o  "_IOServiceGetMatchingServices", referenced from:
+o      _main in check_osx_smc.o
+old: symbol(s) not found for architecture i386
+oclang: error: linker command failed with exit code 1 (use -v to see invocation)
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection117"Link /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc6b83bfb6b15cb541^9cfb1bb7b15cb541^-389"Undefined symbols for architecture i386:  "_IOMasterPort", referenced from:      _main in check_osx_smc.o  "_IOServiceMatching", referenced from:      _main in check_osx_smc.o  "_IOServiceGetMatchingServices", referenced from:      _main in check_osx_smc.old: symbol(s) not found for architecture i386clang: error: linker command failed with exit code 1 (use -v to see invocation)8(21%IDEActivityLogMessage2@33""_IOMasterPort", referenced from:-358396342#41#36#-2#-23%DVTTextDocumentLocation3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@24"_main in check_osx_smc.o-358396342#77#31#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@38""_IOServiceMatching", referenced from:-358396342#108#41#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@24"_main in check_osx_smc.o-358396342#149#31#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@49""_IOServiceGetMatchingServices", referenced from:-358396342#180#52#-2#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#30"Apple Mach-O Linker (ld) Error--2@24"_main in check_osx_smc.o-358396342#232#31#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@41"Symbol(s) not found for architecture i386-358396342#263#46#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--2@79"Clang: error: linker command failed with exit code 1 (use -v to see invocation)-358396342#309#80#-0#-3@-0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#31"Apple Mach-O Linker (ld) Notice--0#0#0#--797"Ld build/Debug/check_osx_smc normal i386    cd /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc    setenv MACOSX_DEPLOYMENT_TARGET 10.7    /Developer/usr/bin/clang -arch i386 -isysroot /Developer/SDKs/MacOSX10.7.sdk -L/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug -F/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug -filelist /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/i386/check_osx_smc.LinkFileList -mmacosx-version-min=10.7 -o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc36"9252A5EB-6D09-42B4-83DA-39D21F31DB2D-
+
+CLd /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc normal x86_64
+s358398687.064812
+e358398687.193452
+r1
+xLd
+x/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc
+xnormal
+xx86_64
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection117"Link /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc2c1011dfba5cb541^1cd234dfba5cb541^---0#0#0#--820"Ld build/Debug/check_osx_smc normal x86_64    cd /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc    setenv MACOSX_DEPLOYMENT_TARGET 10.7    /Developer/usr/bin/clang -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.7.sdk -L/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug -F/Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug -filelist /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/check_osx_smc.build/Debug/check_osx_smc.build/Objects-normal/x86_64/check_osx_smc.LinkFileList -mmacosx-version-min=10.7 -framework IOKit -o /Users/jedda/Development/Deployment/GitHub/OSX_Nagios_Monitoring_Scripts/check_osx_smc/build/Debug/check_osx_smc36"74CF894F-B44F-473E-87A3-76E35F7CE8D2-
+
