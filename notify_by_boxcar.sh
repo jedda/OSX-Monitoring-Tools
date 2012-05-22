@@ -27,10 +27,10 @@ m) message=( "$OPTARG" );;
 esac
 done
 
-curl --data-urlencode "email=$boxcarEmail" \
+curl --ssl --data-urlencode "email=$boxcarEmail" \
 --data-urlencode "&notification[from_screen_name]=$host" \
 --data-urlencode "&notification[icon_url]=http://jedda.me/assets/BoxcarMonitoringIcon.png" \
 --data-urlencode "&notification[message]=$message" \
-http://boxcar.io/devices/providers/MH0S7xOFSwVLNvNhTpiC/notifications
+https://boxcar.io/devices/providers/MH0S7xOFSwVLNvNhTpiC/notifications
 
 exit 0
