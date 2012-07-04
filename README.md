@@ -23,5 +23,5 @@ These scripts and tools were specifically designed to be dependency free, so in 
 
 This is free and unencumbered software released into the public domain - see [LICENSE](https://github.com/jedda/OSX-Monitoring-Tools/blob/master/LICENSE) ([http://unlicense.org/](http://unlicense.org/))
 
-I am happy to chat about any issues you find, or ideas on integrating these scripts into your environment. Feel free to send me an email ([jedda@jedda.me](mailto:jedda@jedda.me "jedda@jedda.me")), or contact me with iMessage ([jwignall@mac.com](imessage://jwignall@mac.com)).
+I am happy to chat about any issues you find, or ideas on integrating these scripts into your environment. Feel free to send me an email ([jedda@jedda.me](mailto:jedda@jedda.me "jedda@jedda.me")), or contact me with iMessage or AIM ([jwignall@mac.com](imessage://jwignall@mac.com)).
 
