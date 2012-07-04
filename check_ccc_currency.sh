@@ -12,7 +12,7 @@
 #	• Can be used as a Nagios plugin to check the time of the last successful clone to a destination
 
 #	--- In Carbon Copy Cloner (CCC) ---
-#   Simply set the script as the post-clone shell script (After copying files...) for your scheduled clone. 
+#	Simply set the script as the post-clone shell script (After copying files...) for your scheduled clone. 
 #	More information can be found at my original blog post about this script (http://jedda.me/2012/07/checking-carbon-copy-cloner-nagios/)
 # 	or the documentation on this feature in CCC (http://www.bombich.com/software/docs/CCC/en.lproj/scheduling/performing-actions-before-and-after-the-backup-task.html)
 
