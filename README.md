@@ -14,6 +14,7 @@ Some of the features of these scripts include:
 *   Checking memory utilization on Mac OS X
 *   Checking the health of Open Directory masters and replicas on Mac OS X Server
 *   Checking Open Directory binding & authentication
+*   Checking the status of tasks scheduled or executed by launchd
 *   Checking certificate expiry on Mac OS X Server
 *   Checking Kerio Connect statistics & performance data
 *   Native (no perl, no python) file age check
