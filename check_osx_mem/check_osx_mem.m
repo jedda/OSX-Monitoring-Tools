@@ -9,6 +9,9 @@
 //	by Jedda Wignall
 //	http://jedda.me
 
+//	v1.1 - 12 Mar 2012
+//	Fixed issue with performance data.
+
 //	v1.0 - 12 Mar 2012
 //	Initial release.
 
@@ -67,7 +70,7 @@ int main (int argc, const char * argv[]) {
 	double percentage = ((double)used/(double)total) * 100.00 ;
 	
     // build our performance data string
-    NSString *performance = [NSString stringWithFormat:@"active=%f;wired=%f;inactive=%f;free=%f;total=%f;utilization=%f;\r\n", (double)(active/1048576), (double)(wired/1048576), (double)(inactive/1048576), (double)(free/1048576), (double)(total/1048576), (double)percentage];
+    NSString *performance = [NSString stringWithFormat:@"active=%f; wired=%f; inactive=%f; free=%f; total=%f; utilization=%f;\r\n", (double)(active/1048576), (double)(wired/1048576), (double)(inactive/1048576), (double)(free/1048576), (double)(total/1048576), (double)percentage];
     
 	// check critical
 	if ([criticalThreshold compare:[NSNumber numberWithFloat:percentage]] == NSOrderedAscending) {
