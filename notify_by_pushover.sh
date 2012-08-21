@@ -10,9 +10,10 @@
 # 	This script sends a Pushover (http://pushover.net/) notification to your account.
 
 #	IMPORTANT
-#	You will need to create a Pushover 'Application' for this script in your account, and use the provided API key as an argument
-#	for this script. You can register an app once logged into Pushover at the follwing link:
+#	You will need to create a Pushover 'Application' for this script in your account, and use the provided API key
+#	as an argument. You can register an app once logged into Pushover at the follwing link:
 #	https://pushover.net/apps/build
+
 # 	Takes the following REQUIRED arguments:
 
 # 	-u		Your Pushover user key.
