@@ -4,6 +4,9 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+#	v1.1 - 17 Sep 2012
+#	Fixed script to throw proper critical error if a cert cannot be loaded by openssl.
+
 #	v1.0 - 20 Mar 2012
 #	Initial release.
 
@@ -21,7 +24,12 @@ do
 	fileType=`echo $c | awk -F . '{print $(NF-1)}'`
 	if [ $fileType == 'cert' ]; then
 		# read the dates on each certificate
-		certDates=`openssl x509 -noout -in "$c" -dates`
+		certDates=`openssl x509 -noout -in "$c" -dates 2>/dev/null`
+		if [ -z "$certDates" ]; then
+			# this cert could not be read.
+	  		printf "CRITICAL - $c could not be loaded by openssl\n"
+			exit 2
+		fi
 		notAfter=`echo $certDates | awk -F notAfter= '{print $NF}'`
 		expiryDate=$(date -j -f "%b %e %T %Y %Z" "$notAfter" "+%s")
 		diff=$(( $expiryDate - $currentDate ))
