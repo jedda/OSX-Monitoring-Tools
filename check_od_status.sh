@@ -43,18 +43,21 @@ done
 
 dirservStatus=`serveradmin fullstatus dirserv` 
 
+# check kerberos kdc status
 kdcStatusString=`echo $dirservStatus | grep -Po 'dirserv:kdcStatus.*?\K(?<=").*?(?=")'`
 if [ "$kdcStatusString" != "RUNNING" ]; then
 	printf "CRITICAL - Kerberos KDC does not appear to be running!\n"
 	exit 2
 fi
 
+# check password server status
 passStatusString=`echo $dirservStatus | grep -Po 'dirserv:passwordServiceState.*?\K(?<=").*?(?=")'`
 if [ "$passStatusString" != "RUNNING" ]; then
 	printf "CRITICAL - Password Server does not appear to be running!\n"
 	exit 2
 fi
 
+# check ldap status
 passStatusString=`echo $dirservStatus | grep -Po 'dirserv:ldapdState.*?\K(?<=").*?(?=")'`
 if [ "$passStatusString" != "RUNNING" ]; then
 	printf "CRITICAL - LDAP Server does not appear to be running!\n"
@@ -80,7 +83,7 @@ if [ "$expectedSearchBase" != "" ]; then
 fi
 
 if [ "$expectedKerberosRealm" != "" ]; then
-	# we are going to check against our expected search base
+	# we are going to check against our expected kerberos realm
 	kerberosRealmString=`echo $dirservStatus | grep -Po 'dirserv:kdcHostedRealm.*?\K(?<=").*?(?=")'`
 	if [ "$kerberosRealmString" != "$expectedKerberosRealm" ]; then
 		printf "CRITICAL - Kerberos realm does not match expected! We expected $expectedKerberosRealm, but reported type was $kerberosRealmString.\n"
