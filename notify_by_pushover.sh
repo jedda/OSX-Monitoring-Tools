@@ -10,8 +10,8 @@
 #	v1.0 - 21 Aug 2012
 #	Initial release.
 
-# 	This script sends a Pushover (http://pushover.net/) notification to your account. I use it in a Nagios setup
-#   to send network monitoring notifications, but it could be used or adapted for nearly any scenario.
+#	This script sends a Pushover (http://pushover.net/) notification to your account. I use it in a Nagios setup
+#	to send network monitoring notifications, but it could be used or adapted for nearly any scenario.
 
 #	IMPORTANT
 #	You will need to create a Pushover 'Application' for this script in your account, and use the provided API key
