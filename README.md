@@ -18,6 +18,7 @@ Some of the features of these scripts include:
 *   Checking certificate expiry on Mac OS X Server
 *   Checking Kerio Connect statistics & performance data
 *   Native (no perl, no python) file age check
+*   Notify via popular notifications platforms Boxcar & Pushover
 *   & more!
 
 These scripts and tools were specifically designed to be dependency free, so in the case of all but one or two, they will run on a stock Mac OS X client/server system from 10.4+ onwards. Most of them are pure BASH, with a few Obj-C exceptions that will need to be compiled prior to use.
