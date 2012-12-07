@@ -4,6 +4,9 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+#	v1.2 - 7 Dec 2012
+#	Added performance data for slapd connections.
+#
 #	v1.1 - 2 Dec 2012
 #	Re-release to fix Mountain Lion issues. Script now runs on 10.8, and will 'fall back' to further checks on 10.7 and earlier.
 #
@@ -24,6 +27,9 @@
 
 #	Example:
 #	./check_od_status.sh -t 'master' -s 'dc=odm,dc=pretendco,dc=com'-r 'ODM.PRETENDCO.COM'
+
+#	Performance Data - this script returns the followng Nagios performance data:
+#	slapdConn -				Number of tcp connections to slapd LDAP daemon.
 
 #	We use this on our client's monitored servers to ensure that no changes have been made to OD configurations, and that
 #	those configs have come up clean across reboots, ect.
@@ -85,11 +91,14 @@ if sw_vers | grep -q '10.5' || sw_vers | grep -q '10.6' || sw_vers | grep -q '10
 
 fi
 
+# check how many tcp connections slapd currently has
+slapdConnections=`sudo lsof -i tcp:389 | grep slapd | wc -l | grep -E -o "[0-9]+"`
+
 serverTypeString=`serveradmin fullstatus dirserv | grep 'dirserv:LDAPServerType' | sed -E 's/dirserv:LDAPServerType.+"(.+)"/\1/'`
 if [ "$expectedServerType" != "" ]; then
 	# we are going to check against our expected server type
 	if [ "$serverTypeString" != "$expectedServerType" ]; then
-		printf "CRITICAL - OD server type does not match expected! We expected $expectedServerType, but reported type was $serverTypeString.\n"
+		printf "CRITICAL - OD server type does not match expected! We expected $expectedServerType, but reported type was $serverTypeString. | slapdConn=$slapdConnections;\n"
 		exit 2
 	fi
 fi
@@ -98,7 +107,7 @@ if [ "$expectedSearchBase" != "" ]; then
 	# we are going to check against our expected search base
 	searchBaseString=`serveradmin fullstatus dirserv | grep 'dirserv:ldapSearchBase' | sed -E 's/dirserv:ldapSearchBase.+"(.+)"/\1/'`
 	if [ "$searchBaseString" != "$expectedSearchBase" ]; then
-		printf "CRITICAL - LDAP search base does not match expected! We expected $expectedSearchBase, but reported type was $searchBaseString.\n"
+		printf "CRITICAL - LDAP search base does not match expected! We expected $expectedSearchBase, but reported type was $searchBaseString. | slapdConn=$slapdConnections;\n"
 		exit 2
 	fi
 fi
@@ -107,10 +116,10 @@ if [ "$expectedKerberosRealm" != "" ]; then
 	# we are going to check against our expected kerberos realm
 	kerberosRealmString=`serveradmin fullstatus dirserv | grep 'dirserv:kdcHostedRealm' | sed -E 's/dirserv:kdcHostedRealm.+"(.+)"/\1/'`
 	if [ "$kerberosRealmString" != "$expectedKerberosRealm" ]; then
-		printf "CRITICAL - Kerberos realm does not match expected! We expected $expectedKerberosRealm, but reported type was $kerberosRealmString.\n"
+		printf "CRITICAL - Kerberos realm does not match expected! We expected $expectedKerberosRealm, but reported type was $kerberosRealmString. | slapdConn=$slapdConnections;\n"
 		exit 2
 	fi
 fi
 
-printf "OK - Server reports that the components of this OD $serverTypeString are running OK.\n"
+printf "OK - Server reports that the components of this OD $serverTypeString are running OK. | slapdConn=$slapdConnections;\n"
 exit 0
