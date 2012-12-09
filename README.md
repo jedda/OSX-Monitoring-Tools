@@ -16,7 +16,7 @@ Some of the features of these scripts include:
 *   Checking Open Directory binding & authentication
 *   Checking the status of tasks scheduled or executed by launchd
 *   Checking certificate expiry on Mac OS X Server
-*   Checking DHCP service on Mac OS X Server
+*   Checking DHCP & Software Update services on Mac OS X Server
 *   Checking Kerio Connect statistics & performance data
 *   Native (no perl, no python) file age check
 *   Notify via popular notifications platforms Boxcar & Pushover
