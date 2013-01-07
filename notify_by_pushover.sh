@@ -4,6 +4,9 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+#	v1.2 - 18 Dec 2012
+#	Added parsing of title for specific warning, critical, and OK sounds.
+
 #	v1.1 - 02 Dec 2012
 #	Added notification sounds.
 
@@ -29,11 +32,15 @@
 
 # 	-p		Notification priority. Set to 1 to ignore quiet times.
 # 	-s		Notification sound. You must use one of the parameters listed at https://pushover.net/api#sounds.
+#	-w		Warning notification sound. The script will look for the text 'WARNING' in the notification title, and use this sound if found.
+#	-c		Critical notification sound. The script will look for the text 'CRITICAL' in the notification title, and use this sound if found.
+#	-o		OK notification sound. The script will look for the text 'OK' in the notification title, and use this sound if found.
 
 # 	Example:
 #	./notify_by_pushover.sh -u r5j7mjYjd -a noZ9KuR5T -s 'spacealarm' -t "server.pretendco.com" -m "DISK WARNING - free space: /dev/disk0s2 4784 MB"
 
-while getopts "u:a:t:m:p:s:" optionName; do
+
+while getopts "u:a:t:m:p:s:w:c:o:" optionName; do
 case "$optionName" in
 u) userKey=( "$OPTARG" );;
 a) appToken=( "$OPTARG" );;
@@ -41,6 +48,9 @@ t) title=( "$OPTARG" );;
 m) message=( "$OPTARG" );;
 p) priority=( "$OPTARG" );;
 s) sound=( "$OPTARG" );;
+w) warnSound=( "$OPTARG" );;
+c) critSound=( "$OPTARG" );;
+o) okSound=( "$OPTARG" );;
 
 esac
 done
@@ -49,6 +59,14 @@ if [ "$priority" != "" ]; then
 	priorityString="priority=$priority"
 else
 	priorityString="priority=0"
+fi
+
+if echo $title | grep -q 'WARNING ' && [ "$warnSound" != "" ] ;then
+	sound=warnSound
+elif echo $title | grep -q 'CRITICAL ' && [ "$critSound" != "" ] ;then
+	sound=critSound
+elif echo $title | grep -q 'OK ' && [ "$okSound" != "" ] ;then
+	sound=okSound
 fi
 
 curl -F "token=$appToken" \
