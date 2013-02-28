@@ -17,7 +17,7 @@
 
 if [[ $EUID -ne 0 ]]; then
    printf "ERROR - This script must be run as root.\n"
-   exit 1
+   exit 3
 fi
 
 for db in /var/db/openldap/openldap-data/*.bdb

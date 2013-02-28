@@ -28,6 +28,7 @@ if echo $lastBackupDateString | grep -q 'does not exist'; then
 fi
 
 lastBackupDate=$(date -j -f "%Y-%m-%e %H:%M:%S %z" "$lastBackupDateString" "+%s" )
+currentDate=$(date +%s)
 
 diff=$(( $currentDate - $lastBackupDate))
 warnSeconds=$(($warnMinutes * 60))
