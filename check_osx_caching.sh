@@ -4,6 +4,8 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+#	v1.1 - 17 Mar 2013
+#	Fixed quotation marks in databasePath (line 72) so that custom paths with spacing will work.
 #	v1.0 - 17 Dec 2012
 #	Initial release.
 
@@ -69,7 +71,7 @@ cacheLimit=`serveradmin fullstatus caching | grep 'caching:CacheLimit ' | grep -
 bytesRequested=`serveradmin fullstatus caching | grep 'caching:TotalBytesRequested' | grep -E -o "[0-9]+$"`
 bytesReturned=`serveradmin fullstatus caching | grep 'caching:TotalBytesReturned' | grep -E -o "[0-9]+$"`
 databasePath="`serveradmin settings caching | grep 'caching:DataPath' | sed -E 's/caching:DataPath.+"(.+)"/\1/'`/AssetInfo.db"
-numberOfPkgs=`sqlite3 $databasePath 'SELECT count(*) from ZASSET;'`
+numberOfPkgs=`sqlite3 "$databasePath" 'SELECT count(*) from ZASSET;'`
 
 # lastly, make sure that we can connect to the service port
 cachingServicePort=`serveradmin fullstatus caching | grep 'caching:Port' | grep -E -o "[0-9]+$"`
