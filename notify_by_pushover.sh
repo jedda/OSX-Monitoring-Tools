@@ -4,6 +4,9 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+#	v1.2.1 - 17 Mar 2013
+#	Now parses title and message for sound processing.
+
 #	v1.2 - 18 Dec 2012
 #	Added parsing of title for specific warning, critical, and OK sounds.
 
@@ -61,12 +64,12 @@ else
 	priorityString="priority=0"
 fi
 
-if echo $title | grep -q 'WARNING ' && [ "$warnSound" != "" ] ;then
-	sound=warnSound
-elif echo $title | grep -q 'CRITICAL ' && [ "$critSound" != "" ] ;then
-	sound=critSound
-elif echo $title | grep -q 'OK ' && [ "$okSound" != "" ] ;then
-	sound=okSound
+if echo $title $message | grep -q 'WARNING' && [ "$warnSound" != "" ] ;then
+    sound=$warnSound
+elif echo $title $message | grep -q 'CRITICAL' && [ "$critSound" != "" ] ;then
+	sound=$critSound
+elif echo $title $message | grep -q 'OK' && [ "$okSound" != "" ] ;then
+	sound=$okSound
 fi
 
 curl -F "token=$appToken" \
