@@ -26,7 +26,7 @@
 #	The script takes the above arguments like this:
 #	./check_osx_launchd.sh -e com.apple.iCloudHelper,com.apple.NotesMigratorService -c com.apple.servermgrd
 
-preset_exceptions="com.apple.printuitool.agent, com.apple.coreservices.appleid.authentication, com.apple.afpstat-qfa, com.apple.mrt.uiagent, com.apple.printtool.agent, com.apple.accountsd, com.apple.xprotectupdater, com.apple.pfctl"
+preset_exceptions="com.apple.printuitool.agent,com.apple.coreservices.appleid.authentication,com.apple.afpstat-qfa,com.apple.mrt.uiagent,com.apple.printtool.agent,com.apple.accountsd,com.apple.xprotectupdater,com.apple.pfctl"
 preset_criticals="org.postgresql.postgres"
 
 # don't edit below this line unless you know what to do
