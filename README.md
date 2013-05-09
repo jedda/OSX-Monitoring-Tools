@@ -12,6 +12,7 @@ Some of the features of these scripts include:
 
 *   Checking the currency of backups with Time Machine, CrashPlan, and Carbon Copy Cloner
 *   Checking memory utilization on Mac OS X
+*   Checking SMC sensors (temperatures/fans) on Apple hardware
 *   Checking the health of Open Directory masters and replicas on Mac OS X Server
 *   Checking Open Directory binding & authentication
 *   Checking the status of tasks scheduled or executed by launchd
