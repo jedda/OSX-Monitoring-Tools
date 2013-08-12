@@ -94,8 +94,8 @@ fi
 
 if echo $graphs | grep -q "lifetimeReads"
 then
-	lifetimeReads=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Lifetime_Writes_GiB' | grep -E -o "[0-9]+" | tail -1`
-	graphString="$graphString lifetimeReads=$lifetimeReads"
+	lifetimeReads=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Lifetime_Reads_GiB' | grep -E -o "[0-9]+" | tail -1`
+	graphString="$graphString lifetimeReads=$lifetimeReads;"
 fi
 
 if echo $resultString | grep -q "PASSED"
