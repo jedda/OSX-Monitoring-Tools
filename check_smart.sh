@@ -23,6 +23,8 @@
 #	* powerOnHours		Number of hours the disk has been powered on for
 #	* tempCelcius		Temperature in celcius of the disk (internal)
 #	* retiredBlockCount	Number of retired blocks
+#	* lifetimeWrites	Number of lifetime writes (in GiB)
+#	* lifetimeReads		Number of lifetime read (in GiB)
 
 disk=""
 graphs=""
@@ -82,6 +84,18 @@ if echo $graphs | grep -q "retiredBlockCount"
 then
 	retiredBlockCount=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Retired_Block_Count' | grep -E -o "[0-9]+" | tail -1`
 	graphString="$graphString retiredBlockCount=$retiredBlockCount;"
+fi
+
+if echo $graphs | grep -q "lifetimeWrites"
+then
+	lifetimeWrites=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Lifetime_Writes_GiB' | grep -E -o "[0-9]+" | tail -1`
+	graphString="$graphString lifetimeWrites=$lifetimeWrites;"
+fi
+
+if echo $graphs | grep -q "lifetimeReads"
+then
+	lifetimeReads=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Lifetime_Writes_GiB' | grep -E -o "[0-9]+" | tail -1`
+	graphString="$graphString lifetimeReads=$lifetimeReads"
 fi
 
 if echo $resultString | grep -q "PASSED"
