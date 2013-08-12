@@ -22,6 +22,7 @@
 #	* reallocSectors	Number of re-allocated sectors on disk
 #	* powerOnHours		Number of hours the disk has been powered on for
 #	* tempCelcius		Temperature in celcius of the disk (internal)
+#	* retiredBlockCount	Number of retired blocks
 
 disk=""
 graphs=""
@@ -75,6 +76,12 @@ if echo $graphs | grep -q "tempCelcius"
 then
 	internalTemp=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Temperature_Celsius' | grep -E -o "[0-9]+" | tail -1`
 	graphString="$graphString tempCelcius=$internalTemp;"
+fi
+
+if echo $graphs | grep -q "retiredBlockCount"
+then
+	retiredBlockCount=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Retired_Block_Count' | grep -E -o "[0-9]+" | tail -1`
+	graphString="$graphString retiredBlockCount=$retiredBlockCount;"
 fi
 
 if echo $resultString | grep -q "PASSED"
