@@ -7,7 +7,14 @@
 #	v1.0 - 9 Aug 2013
 #	Initial release.
 
-#	Checks to see how large the folder is, in MB, and warns or crits if over a specified size.
+#	Checks to see how large the folder is and warns or crits if over a specified size.
+#	Defaults to MB
+
+#	Arguments:
+#	-f	Path to folder
+#	-b	Block size (i.e. data returned in MB, KB or GB - enter as m, k or g)
+#	-w	Warning threshold for storage used
+#	-c	Critical threshold for storage used
 
 #	Example:
 #	./check_folder_size.sh -f /Library/Application\ Support/ -w 2048 -c 4096
