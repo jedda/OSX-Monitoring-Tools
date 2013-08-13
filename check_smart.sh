@@ -16,6 +16,8 @@
 
 #	Example:
 #	./check_smart.sh -d disk0 -g "badSectors tempCelcius"
+#		OR
+#	./check_smart.sh -d disk1
 
 #	Performance Data
 #	* badSectors		Number of bad sectors on disk
@@ -80,18 +82,21 @@ then
 	graphString="$graphString tempCelcius=$internalTemp;"
 fi
 
+# Did user want retiredBlockCount graph?
 if echo $graphs | grep -q "retiredBlockCount"
 then
 	retiredBlockCount=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Retired_Block_Count' | grep -E -o "[0-9]+" | tail -1`
 	graphString="$graphString retiredBlockCount=$retiredBlockCount;"
 fi
 
+# Did user want lifetimeWrites graph?
 if echo $graphs | grep -q "lifetimeWrites"
 then
 	lifetimeWrites=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Lifetime_Writes_GiB' | grep -E -o "[0-9]+" | tail -1`
 	graphString="$graphString lifetimeWrites=$lifetimeWrites;"
 fi
 
+# Did user want lifetimeReads graph?
 if echo $graphs | grep -q "lifetimeReads"
 then
 	lifetimeReads=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Lifetime_Reads_GiB' | grep -E -o "[0-9]+" | tail -1`
@@ -103,6 +108,21 @@ then
   	printf "OK - All S.M.A.R.T. attributes passed $graphString\n"
   	exit 0
 else
+	
+	# Check to see if there's been many seek error rates
+	seekErrorRateRaw=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Seek_Error_Rate' | grep -E -o "[0-9]+" | tail -1`
+	if [ $seekErrorRateRaw -gt 50 ]
+	then
+		printf "CRITICAL - Drive is having constant read errors! $graphString\n"
+		exit 2
+	fi
+	
+	if [ $seekErrorRateRaw -gt 25 ]
+	then
+		printf "WARNING - Drive has had multiple read errors! $graphString\n"
+		exit 1
+	fi
+	
 	# Get the first line that is FAILING_NOW
 	failString=`echo $resultString | grep -C 0 'FAILING_NOW'`
 	# Now we make a human readable error message
@@ -117,6 +137,10 @@ else
 	elif echo $failString | grep -q "Temperature_Celsius"
 	then
 		printf "CRITICAL - Drive is exposed to extreme temperatures! $graphString\n"
+		exit 2
+	elif echo $failString | grep -q "Seek_Error_Rate\|Raw_Read_Error_Rate"
+	then
+		printf "CRITICAL - Drive is having constant read errors! $graphString\n"
 		exit 2
 	else
 		printf "WARNING - Drive has failing S.M.A.R.T. attributes! $graphString\n"
