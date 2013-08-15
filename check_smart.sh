@@ -108,7 +108,6 @@ then
   	printf "OK - All S.M.A.R.T. attributes passed $graphString\n"
   	exit 0
 else
-	
 	# Check to see if there's been many seek error rates
 	seekErrorRateRaw=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Seek_Error_Rate' | grep -E -o "[0-9]+" | tail -1`
 	if [ $seekErrorRateRaw -gt 50 ]
@@ -120,6 +119,20 @@ else
 	if [ $seekErrorRateRaw -gt 25 ]
 	then
 		printf "WARNING - Drive has had multiple read errors! $graphString\n"
+		exit 1
+	fi
+	
+	# Make sure the drive isn't hitting its maximum temperature!
+	tempRaw=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Temperature_Celsius' | grep -E -o "[0-9]+" | tail -1`
+	if [ $tempRaw -gt 65 ]
+	then
+		printf "CRITICAL - Drive is maxing out its maximum designed temperature! $graphString\n"
+		exit 2
+	fi
+	
+	if [ $tempRaw -gt 60 ]
+	then
+		printf "WARNING - Drive is close to its maximum designed temperature! $graphString\n"
 		exit 1
 	fi
 	
