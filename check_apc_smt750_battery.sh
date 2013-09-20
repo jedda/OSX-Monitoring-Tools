@@ -47,7 +47,7 @@ battVoltage=`/opt/local/libexec/nagios/check_apcupsd.sh battv | grep -E -o "[0-9
 critMath=`echo $battCharge '<=' $critThresh | bc -l`
 if [ $critMath -eq 1 ]
 then
-	printf "CRITICAL - battery charge is $battCharge%%, which is below $critThresh%% | battCharge=$battCharge; battVoltage=$battVoltage; warnThresh=$warnThresh; critThresh=$critThresh;\n"
+	printf "CRITICAL - battery charge is $battCharge%%, which is below $critThresh%% | battCharge=$battCharge; battWarn=$warnThresh; battCrit=$critThresh; voltage=$battVoltage;\n"
 	exit 2
 fi
 
@@ -55,9 +55,9 @@ fi
 warnMath=`echo $battCharge '<=' $warnThresh | bc -l`
 if [ $warnMath -eq 1 ]
 then
-	printf "WARNING - battery charge is $battCharge%%, which is below $warnThresh%% | battCharge=$battCharge; battVoltage=$battVoltage; warnThresh=$warnThresh; critThresh=$critThresh;\n"
+	printf "WARNING - battery charge is $battCharge%%, which is below $warnThresh%% | battCharge=$battCharge; battWarn=$warnThresh; battCrit=$critThresh; voltage=$battVoltage;\n"
 	exit 1
 fi
 
-printf "OK - battery charge is at $battCharge%% | battCharge=$battCharge; battVoltage=$battVoltage; warnThresh=$warnThresh; critThresh=$critThresh;\n"
+printf "OK - battery charge is at $battCharge%% | battCharge=$battCharge; battWarn=$warnThresh; battCrit=$critThresh; voltage=$battVoltage;\n"
 exit 0
