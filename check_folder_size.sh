@@ -68,13 +68,13 @@ folderSize=`du -s$blockSize $folderPath | grep -E -o "[0-9]+"`
 
 if [ "$folderSize" -ge "$critThresh" ]
 then
-	printf "CRITICAL - folder is $folderSize $blockSizeFriendly in size | folderSize=$folderSize;\n"
+	printf "CRITICAL - folder is $folderSize $blockSizeFriendly in size | folderSize=$folderSize;$warnThresh;$critThresh;\n"
 	exit 2
 elif [ "$folderSize" -ge "$warnThresh" ]
 then
-	printf "WARNING - folder is $folderSize $blockSizeFriendly in size | folderSize=$folderSize;\n"
+	printf "WARNING - folder is $folderSize $blockSizeFriendly in size | folderSize=$folderSize;$warnThresh;$critThresh;\n"
 	exit 1
 fi
 
-printf "OK - folder is $folderSize $blockSizeFriendly in size | folderSize=$folderSize;\n"
+printf "OK - folder is $folderSize $blockSizeFriendly in size | folderSize=$folderSize;$warnThresh;$critThresh;\n"
 exit 0
