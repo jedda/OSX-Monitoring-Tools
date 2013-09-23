@@ -9,7 +9,7 @@
 
 #	Requirements:
 #	- Apcupsd to be stored in the same directory (http://www.apcupsd.com/)
-#	- check_apcupsd.sh v1.3 (http://martintoft.dk/?p=check_apcupsd) (http://cl.ly/RYQf - download)
+#	- check_apcupsd.sh v2.6 (http://martintoft.dk/?p=check_apcupsd)
 
 #	Arguments:
 #	-w   Warning threshold for battery charge (%)
@@ -43,8 +43,8 @@ then
 	exit 2
 fi
 
-battCharge=`$apcupsdPath/check_apcupsd.sh -w $warnThresh -c $critThresh bcharge | grep -E -o "[0-9.]+"`
-battVoltage=`$apcupsdPath/check_apcupsd.sh battv | grep -E -o "[0-9.]+"`
+battCharge=`$apcupsdPath/check_apcupsd.sh -w $warnThresh -c $critThresh bcharge | grep -E -o "[0-9.]+[%]" | tail -1 | grep -E -o "[0-9.]+"`
+battVoltage=`$apcupsdPath/check_apcupsd.sh battv | grep -E -o "[0-9.V]+" | tail -1 | grep -E -o "[0-9.]+"`
 
 # Do BC math because battCharge is returned as a float
 critMath=`echo $battCharge '<=' $critThresh | bc -l`
