@@ -8,15 +8,18 @@
 #	Initial Release
 
 #	Requirements:
-#	Apcupsd to be stored in the same directory (http://www.apcupsd.com/)
+#	- Apcupsd to be stored in the same directory (http://www.apcupsd.com/)
+#	- check_apcupsd.sh v1.3 (http://martintoft.dk/?p=check_apcupsd) (http://cl.ly/RYQf - download)
 
 #	Arguments:
-#	-w   Warning threshold for battery charge
-#	-c   Critical threshold for battery charge
+#	-w   Warning threshold for battery charge (%)
+#	-c   Critical threshold for battery charge (%)
 
 #	Example:
 #	./check_apc_smt750_battery.sh -w 80 -c 20
 
+# Change this variable if the path to check_apcupsd.sh is different
+apcupsdPath="/opt/local/libexec/nagios"
 warnThresh=""
 critThresh=""
 
@@ -31,17 +34,17 @@ done
 if [ "$warnThresh" == "" ]
 then
 	printf "ERROR - You must provide a warning threshold with -w!\n"
-	exit 2
+	exit 1
 fi
 
 if [ "$critThresh" == "" ]
 then
 	printf "ERROR - You must provide a critical threshold with -c!\n"
-	exit 1
+	exit 2
 fi
 
-battCharge=`/opt/local/libexec/nagios/check_apcupsd.sh -w $warnThresh -c $critThresh bcharge | grep -E -o "[0-9.]+"`
-battVoltage=`/opt/local/libexec/nagios/check_apcupsd.sh battv | grep -E -o "[0-9.]+"`
+battCharge=`$apcupsdPath/check_apcupsd.sh -w $warnThresh -c $critThresh bcharge | grep -E -o "[0-9.]+"`
+battVoltage=`$apcupsdPath/check_apcupsd.sh battv | grep -E -o "[0-9.]+"`
 
 # Do BC math because battCharge is returned as a float
 critMath=`echo $battCharge '<=' $critThresh | bc -l`
