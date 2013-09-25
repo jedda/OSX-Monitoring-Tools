@@ -17,7 +17,7 @@
 #	Example:
 #	./check_radius -u fakeuser -p fakepass -h localhost -a 1812 -s fake_shared_secret
 
-# We need to run this as root because we write a temp log file
+# We need to run this as root because FreeRADIUS requires it, plus we write a temp log file
 if [[ $EUID -ne 0 ]]
 then
 	echo "ERROR - This script must be run as root."
@@ -42,7 +42,7 @@ while getopts "u:p:h:a:s:" opt
 		esac
 done
 
-# Quick check to see if FreeRADIUs is even running
+# Quick check to see if FreeRADIUS is even running
 if [ "`ps aux -o tty | grep "/usr/sbin/radius"`" == "" ]
 then
 	echo "ERROR - RADIUS is not running!"
