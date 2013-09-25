@@ -7,6 +7,9 @@
 #	v1.0 - 24 August 2013
 #	Initial Release
 
+#	This script does a number of checks to verify that the FreeRADIUS server is running.
+#	Please ensure you have a valid user account to check the full status of the server.
+
 #	Arguments:
 #	-u   Username to test authentication
 #	-p   Password for the above user
@@ -45,13 +48,13 @@ done
 # Quick check to see if FreeRADIUS is even running
 if [ "`ps aux -o tty | grep "/usr/sbin/radius"`" == "" ]
 then
-	echo "ERROR - RADIUS is not running!"
+	echo "CRITICAL - RADIUS is not running!"
 	exit 2
 fi
 
-# Attempt to authenticate with the FreeRADIUS server, using the credentials and details above
+# Attempt to authenticate with the FreeRADIUS server, using the credentials and details above, then send stderr to a temp log file
 authAttempt=`echo "User-Name=$username,User-Password=$password,Framed-Protocol=PPP " | radclient -x -r 1 -t 2 $host:$port auth $secret 2> /tmp/radius_error`
-# Capture stderr to a variable
+# Assign the stderr log file to a variable
 radiusStderr=$(</tmp/radius_error)
 
 # What did authAttempt return?  Good news I hope.
