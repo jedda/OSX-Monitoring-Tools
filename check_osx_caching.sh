@@ -73,7 +73,7 @@ if [ "$cachingStatus" != "OK" ]; then
 fi
 
 # Check to see if we're running Mavericks Server as there's a bit more usage verbosity
-osVersion=`sw_vers | grep -C 0 "ProductVersion:" | grep -E -o "[0-9]+\.[0-9]+"`
+osVersion=`sw_vers -productVersion | grep -E -o "[0-9]+\.[0-9]"`
 isMavericks=`echo $osVersion '< 10.9' | bc -l`
 mavericksPerfData=''
 
