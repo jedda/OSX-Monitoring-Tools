@@ -7,6 +7,9 @@
 #	v1.0 - 24 August 2013
 #	Initial Release
 
+#	v1.1 - 27 October 2013
+#	Updated for OS X Mavericks
+
 #	This script does a number of checks to verify that the FreeRADIUS server is running.
 #	Please ensure you have a valid user account to check the full status of the server.
 
@@ -15,10 +18,14 @@
 #	-p   Password for the above user
 #	-h   The host for the FreeRADIUS server (usually localhost)
 #	-a   The port for the FreeRADIUS server (usually 1812)
-#	-s   The shared secret for the IP address you're connecting from
+#	-s   The shared secret for the IP address you're connecting from (testing123 if testing on localhost)
 
 #	Example:
-#	./check_radius -u fakeuser -p fakepass -h localhost -a 1812 -s fake_shared_secret
+#	./check_radius.sh -u fakeuser -p fakepass -h localhost -a 1812 -s fake_shared_secret
+
+#	Supports:
+#	* OS X 10.8 Mountain Lion, Server 2.2.x
+#	* OS X 10.9 Mavericks, Server 3.0
 
 # We need to run this as root because FreeRADIUS requires it, plus we write a temp log file
 if [[ $EUID -ne 0 ]]
@@ -45,11 +52,25 @@ while getopts "u:p:h:a:s:" opt
 		esac
 done
 
-# Quick check to see if FreeRADIUS is even running
-if [ "`ps aux -o tty | grep "/usr/sbin/radius"`" == "" ]
+# Check to see if we're running Mavericks Server as RADIUS runs a little differently
+osVersion=`sw_vers -productVersion | grep -E -o "[0-9]+\.[0-9]"`
+isMavericks=`echo $osVersion '< 10.9' | bc -l`
+
+if [ $isMavericks -eq 0 ]
 then
-	echo "CRITICAL - RADIUS is not running!"
-	exit 2
+	# Quick check to see if FreeRADIUS is even running
+	if [ "`ps -ef | grep radiusd`" == "" ]
+	then
+		echo "CRITICAL _ RADIUS is not running!"
+		exit 2
+	fi
+else
+	# Quick check to see if FreeRADIUS is even running
+	if [ "`ps aux -o tty | grep "/usr/sbin/radius"`" == "" ]
+	then
+		echo "CRITICAL - RADIUS is not running!"
+		exit 2
+	fi
 fi
 
 # Attempt to authenticate with the FreeRADIUS server, using the credentials and details above, then send stderr to a temp log file
@@ -60,6 +81,7 @@ radiusStderr=$(</tmp/radius_error)
 # What did authAttempt return?  Good news I hope.
 if [ `echo $authAttempt | grep -o "Access-Accept"` ]
 then
+	# Success!
 	echo "OK - RADIUS is running and accepting connections."
 	exit 0
 elif [ `echo $radiusStderr | grep -o "Shared"` ]
