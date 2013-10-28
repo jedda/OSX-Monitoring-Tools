@@ -58,13 +58,15 @@ isMavericks=`echo $osVersion '< 10.9' | bc -l`
 
 if [ $isMavericks -eq 0 ]
 then
+	# 10.9+ Check
 	# Quick check to see if FreeRADIUS is even running
 	if [ "`ps -ef | grep radiusd`" == "" ]
 	then
-		echo "CRITICAL _ RADIUS is not running!"
+		echo "CRITICAL - RADIUS is not running!"
 		exit 2
 	fi
 else
+	# < 10.9 Check
 	# Quick check to see if FreeRADIUS is even running
 	if [ "`ps aux -o tty | grep "/usr/sbin/radius"`" == "" ]
 	then
