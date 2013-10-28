@@ -39,6 +39,7 @@
 #	10.6 Server
 #	10.7 Server
 #	10.8 Server
+#	10.9 Server
 
 if [[ $EUID -ne 0 ]]; then
    printf "ERROR - This script must be run as root.\n"

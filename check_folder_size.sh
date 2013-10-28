@@ -4,7 +4,10 @@
 #	by Dan Barrett
 #	http://yesdevnull.net
 
-#	v1.0 - 9 Aug 2013
+#	v1.1 - 28 October 2013
+#	Added OS X 10.9 Support and fixes a bug where folders with spaces in their name would fail with du.
+
+#	v1.0 - 9 August 2013
 #	Initial release.
 
 #	Checks to see how large the folder is and warns or crits if over a specified size.
@@ -18,6 +21,11 @@
 
 #	Example:
 #	./check_folder_size.sh -f /Library/Application\ Support/ -w 2048 -c 4096
+
+#	Supports:
+#	Untested but I'm sure it works fine on OS X 10.6 and 10.7
+#	* OS X 10.8.x
+#	* OS X 10.9
 
 folderPath=""
 blockSize="m"
@@ -64,7 +72,7 @@ then
 	blockSizeFriendly="GB"
 fi
 
-folderSize=`du -s$blockSize $folderPath | grep -E -o "[0-9]+"`
+folderSize=`du -s$blockSize "$folderPath" | grep -E -o "[0-9]+"`
 
 if [ "$folderSize" -ge "$critThresh" ]
 then

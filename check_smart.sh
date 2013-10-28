@@ -28,6 +28,10 @@
 #	* lifetimeWrites	Number of lifetime writes (in GiB)
 #	* lifetimeReads		Number of lifetime read (in GiB)
 
+#	Supports:
+#	* OS X 10.8.x
+#	* OS X 10.9
+
 disk=""
 graphs=""
 graphString=""
