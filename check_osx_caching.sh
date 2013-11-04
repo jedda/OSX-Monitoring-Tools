@@ -117,7 +117,7 @@ numberOfPkgs=`sqlite3 "$databasePath" 'SELECT count(*) from ZASSET;'`
 cachingServicePort=`serveradmin fullstatus caching | grep 'caching:Port' | grep -E -o "[0-9]+$"`
 curl -silent localhost:$cachingServicePort > /dev/null
 if [ $? == 7 ]; then
-    printf "CRITICAL - Could not connect to the Caching service port ($swupdateServicePort).\n"
+    printf "CRITICAL - Could not connect to the Caching service port ($cachingServicePort)!\n"
     exit 2
 fi
 
