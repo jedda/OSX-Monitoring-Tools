@@ -14,12 +14,10 @@
 #	Script that uses serveradmin to check that the OS X Caching service is listed as running.
 #	If all is OK, it returns performance data for the size and limits of cached content, number of cached packages and
 #	bytes requested by and returned from the service.
-#   If you want to check to see if the Caching service is running on a specific port, use the -p flag and specify the port.
+#   Also checks to see if the Caching service is running on the port that is set in caching:Port
 
 #	Example:
 #	./check_osx_caching.sh
-#    OR
-#   ./check_osx_caching.sh -p 69010
 
 #	Performance Data - this script returns the followng Nagios performance data:
 #	reservedSpace -       Space reserved by the caching service for cache use.
@@ -47,15 +45,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-specificPort="0"
-
-while getopts "p:" opt
-  do
-    case $opt in
-      p ) specificPort=$OPTARG;;
-    esac
-done
-
 # Check that the caching service is running
 cachingStatus=`serveradmin fullstatus caching | grep 'caching:state' | sed -E 's/caching:state.+"(.+)"/\1/'`
 if [ "$cachingStatus" != "RUNNING" ]; then
@@ -79,11 +68,15 @@ if [ "$cachingActive" != "yes" ] || [ "$cachingStartupStatus" != "OK" ]; then
     exit 1
 fi
 
-cachingPort=`serveradmin fullstatus caching | grep 'caching:Port ' | grep -E -o "[0-9]+$"`
-if [ "$cachingPort" != "$specificPort" ]
+specifiedCachingPort=`serveradmin settings caching | grep 'caching:Port ' | grep -E -o "[0-9]+$"`
+currentCachingPort=`serveradmin fullstatus caching | grep 'caching:Port ' | grep -E -o "[0-9]+$"`
+if [ $specifiedCachingPort != "0" ]
 then
-    printf "WARNING - Caching Server is running on port $cachingPort and not $specificPort as required.\n"
-    exit 1
+    if [ "$currentCachingPort" != "$specifiedCachingPort" ]
+    then
+        printf "WARNING - Caching Server is running on port $currentCachingPort and not $specifiedCachingPort as required.\n"
+        exit 1
+    fi
 fi
 
 # Check that the cache itself reports as OK
