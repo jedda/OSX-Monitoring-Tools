@@ -36,8 +36,8 @@
 while getopts "w:c:" opt
     do
         case $opt in
-                w ) warnMinutes=$OPTARG;;
-                c ) critMinutes=$OPTARG;;
+            w ) warnMinutes=$OPTARG;;
+            c ) critMinutes=$OPTARG;;
         esac
 done
 
@@ -64,8 +64,8 @@ then
 
     if [ "$lastBackupDateString" == "" ]
     then
-            printf "CRITICAL - Time Machine has not completed a backup on this Mac!\n"
-            exit 2
+        printf "CRITICAL - Time Machine has not completed a backup on this Mac!\n"
+        exit 2
     fi
 
     lastBackupDate=`date -j -f "%Y-%m-%d-%H%M%S" $lastBackupDateString "+%s"`
