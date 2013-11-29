@@ -38,6 +38,8 @@ expiryDays=$(( $expiryInDays * 86400 ))
 # Quick function to tidy up output results in days
 numberOfDays() {
 	dayDiff=`printf "%.0f" $( echo "scale=0; $1 / 60 / 60 / 24" | bc -l )`
+	dayDiff=`echo $dayDiff | sed 's/-//g'`
+
 	dayName="days"
 
 	if [ "$dayDiff" -eq "1" ]
@@ -66,7 +68,7 @@ diff=$(( $currentDateInEpoch - $notBeforeExpiry ))
 # Is certificate not valid until the future?  If so, throw a critical(2)
 if [ "$diff" -lt "0" ]
 then
-	printf "CRITICAL - Certificate is not valid until $( numberOfDays $diff | cut -c 2- )!\n"
+	printf "CRITICAL - Certificate is not valid until $( numberOfDays $diff )!\n"
 	exit 2
 fi
 
@@ -78,7 +80,7 @@ diff=$(( $notAfterExpiry - $currentDateInEpoch ))
 # If the differential is less than 0, the certificate has already expired, throw a critical(2)
 if [ "$diff" -lt "0" ]
 then
-	printf "CRITICAL - Certificate expired $( numberOfDays $diff | cut -c 2- ) ago!\n"
+	printf "CRITICAL - Certificate expired $( numberOfDays $diff ) ago!\n"
 	exit 2
 fi
 
