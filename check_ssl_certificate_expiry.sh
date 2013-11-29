@@ -37,9 +37,7 @@ expiryDays=$(( $expiryInDays * 86400 ))
 
 # Quick function to tidy up output results in days
 numberOfDays() {
-	# seconds
 	dayDiff=`printf "%.0f" $( echo "scale=0; $1 / 60 / 60 / 24" | bc -l )`
-
 	dayName="days"
 
 	if [ "$dayDiff" -eq "1" ]
