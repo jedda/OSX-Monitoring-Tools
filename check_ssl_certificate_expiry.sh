@@ -68,7 +68,7 @@ diff=$(( $currentDateInEpoch - $notBeforeExpiry ))
 # Is certificate not valid until the future?  If so, throw a critical(2)
 if [ "$diff" -lt "0" ]
 then
-	printf "CRITICAL - Certificate is not valid until $( numberOfDays $diff )!\n"
+	printf "CRITICAL - Certificate is not valid for $( numberOfDays $diff )!\n"
 	exit 2
 fi
 
