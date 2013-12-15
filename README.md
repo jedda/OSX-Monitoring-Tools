@@ -36,3 +36,5 @@ License:
 --------
 
 This is free and unencumbered software released into the public domain - see [LICENSE](https://github.com/jedda/OSX-Monitoring-Tools/blob/master/LICENSE) ([http://unlicense.org/](http://unlicense.org/))
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jedda/osx-monitoring-tools/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
