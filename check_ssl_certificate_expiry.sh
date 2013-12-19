@@ -32,6 +32,24 @@ while getopts "h:p:e:" opt
 		esac
 done
 
+if [ ! "$host" ]
+then
+	printf "ERROR - Please ensure you have entered a hostname with -h!\n"
+	exit 3
+fi
+
+if [ ! "$port" ]
+then
+	printf "ERROR - Please add a port with -p\n"
+	exit 3
+fi
+
+if [ ! "$expiryInDays" ]
+then
+	printf "ERROR - Please add an expiry in days with -e\n"
+	exit 3
+fi
+
 currentDateInEpoch=`date +%s`
 expiryDays=$(( $expiryInDays * 86400 ))
 
