@@ -72,11 +72,12 @@ numberOfDays() {
 
 beforeExpiry=`echo "QUIT" | openssl s_client -connect $host:$port 2>/dev/null | openssl x509 -noout -startdate 2>/dev/null`
 afterExpiry=`echo "QUIT" | openssl s_client -connect $host:$port 2>/dev/null | openssl x509 -noout -enddate 2>/dev/null`
+commonName=`echo "QUIT" | openssl s_client -connect $host:$port 2>/dev/null | openssl x509 -subject -noout 2>/dev/null | sed -E 's/.+CN=([^/]*)?/\1/'`
 
 # If the stdout of the date results is null, throw a critical(2)
 if [ -z "$beforeExpiry" ] || [ -z "$afterExpiry" ]
 then
-	printf "CRITICAL - Unable to read certificate.\n"
+	printf "CRITICAL - Unable to read certificate for $host.\n"
 	exit 2
 fi
 
@@ -88,7 +89,7 @@ diff=$(( $currentDateInEpoch - $notBeforeExpiry ))
 # Is certificate not valid until the future?  If so, throw a critical(2)
 if [ "$diff" -lt "0" ]
 then
-	printf "CRITICAL - Certificate is not valid for $( numberOfDays $diff )!\n"
+	printf "CRITICAL - Certificate $commonName is not valid for $( numberOfDays $diff )!\n"
 	exit 2
 fi
 
@@ -100,17 +101,17 @@ diff=$(( $notAfterExpiry - $currentDateInEpoch ))
 # If the differential is less than 0, the certificate has already expired, throw a critical(2)
 if [ "$diff" -lt "0" ]
 then
-	printf "CRITICAL - Certificate expired $( numberOfDays $diff ) ago!\n"
+	printf "CRITICAL - Certificate $commonName expired $( numberOfDays $diff ) ago!\n"
 	exit 2
 fi
 
 # If the differential is less than the expiry days, throw a warning(1)
 if [ "$diff" -lt "$expiryDays" ]
 then
-	printf "WARNING - Certificate will expire in less than $( numberOfDays $diff ).\n"
+	printf "WARNING - Certificate $commonName will expire in less than $( numberOfDays $diff ).\n"
 	exit 1
 fi
 
 # All OK(0)
-printf "OK - Certificate expires in $( numberOfDays $diff ).\n"
+printf "OK - Certificate $commonName expires in $( numberOfDays $diff ).\n"
 exit 0
