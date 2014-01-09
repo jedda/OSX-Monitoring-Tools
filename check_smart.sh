@@ -82,7 +82,7 @@ fi
 # Did user want tempCelcius graph?
 if echo $graphs | grep -q "tempCelcius"
 then
-	internalTemp=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Temperature_Celsius' | grep -E -o "[0-9]+[^0-9/\)]" | tail -1`
+	internalTemp=`/opt/local/libexec/nagios/smartctl -a $disk | grep -C 0 'Temperature_Celsius' | grep -E -o "[0-9]+[^0-9/\)]" | sed 's/ //g' | tail -1`
 	graphString="$graphString tempCelcius=$internalTemp;"
 fi
 
