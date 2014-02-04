@@ -36,7 +36,7 @@ then
 fi
 
 lastBackupLine=`grep -n lastCompletedBackupTimestamp "$cpDirectory"`
-lastBackupDateString=`echo $lastBackupLine | awk -F lastCompletedBackupTimestamp= '{print $NF}' | sed 's/.\{5\}$//' | sed 's/%//'`
+lastBackupDateString=`echo $lastBackupLine | awk -F lastCompletedBackupTimestamp= '{print $NF}' | sed 's/.\{5\}$//' | sed 's/%//' | sed 's/T/ /'`
 lastBackupDate=$(date -j -f "%Y-%m-%eT%H\:%M\:%S" "$lastBackupDateString" "+%s" )
 
 diff=$(( $currentDate - $lastBackupDate))
