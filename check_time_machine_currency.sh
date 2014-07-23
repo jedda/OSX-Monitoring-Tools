@@ -60,6 +60,12 @@ isMavericks=`echo $osVersion '< 10.9' | bc -l`
 if [ $isMavericks -eq 0 ]
 then
     # 10.9+ Check
+    tmIsRunning=`tmutil status | grep Running | awk '{print $3}' | awk -F';' '{print $1}'`
+    if [ "$tmIsRunning" == "1" ]
+    then
+        printf "OK - Time Machine is backing up on this Mac!\n"
+        exit 0
+    fi
     lastBackupDateString=`tmutil latestbackup | grep -E -o "[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}"`
 
     if [ "$lastBackupDateString" == "" ]
