@@ -54,7 +54,7 @@ then
 fi
 
 # Check to see if we're running Mavericks or Yosemite as Time Machine runs a little differently
-osVersion=`sw_vers -productVersion | grep -E -o "[0-9]?[0-9]+\.[0-9]?[0-9]"`
+osVersion=`sw_vers -productVersion | grep -E -o "[0-9]+\.[0-9]?[0-9]"`
 isMavericks=`echo $osVersion '< 10.9' | bc -l`
 isYosemite=`echo $osVersion '< 10.10' | bc -l`
 
