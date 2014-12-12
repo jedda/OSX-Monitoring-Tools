@@ -53,11 +53,12 @@ then
     exit 3
 fi
 
-# Check to see if we're running Mavericks as Time Machine runs a little differently
-osVersion=`sw_vers -productVersion | grep -E -o "[0-9]+\.[0-9]"`
+# Check to see if we're running Mavericks or Yosemite as Time Machine runs a little differently
+osVersion=`sw_vers -productVersion | grep -E -o "[0-9]?[0-9]+\.[0-9]?[0-9]"`
 isMavericks=`echo $osVersion '< 10.9' | bc -l`
+isYosemite=`echo $osVersion '< 10.10' | bc -l`
 
-if [ $isMavericks -eq 0 ]
+if [ $isMavericks -eq 0 ] || [ $isYosemite -eq 0 ]
 then
     # 10.9+ Check
     lastBackupDateString=`tmutil latestbackup | grep -E -o "[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}"`
