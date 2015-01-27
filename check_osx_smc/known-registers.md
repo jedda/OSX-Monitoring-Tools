@@ -75,3 +75,27 @@ Hardware List
 - *F1Ac* - Exhaust Fan (Actual Speed)
 - *F2Ac* - Expansion Fan (Actual Speed)
 - *F3Ac* - Power Supply Fan (Actual Speed)
+- 
+####MacBookPro9,2
+- *Th1H* NB/CPU/GPU HeatPipe 1 Proximity  
+- *Ts0P* Palm rest L  
+- *Ts0S*   
+- *TA0P* Ambient temperature 
+- *TB0T* Battery Temperature  
+- *TB1T*  
+- *TB2T*  
+- *TCGC* GPU?? 
+- *TCSA*  
+- *TCTD*   
+- *TCXC*   
+- *TC0E*   
+- *TC0F*  
+- *TC0J*   
+- *TC0P* CPU_PROXIMITY_TEMPERATURE  
+- *TC1C* CORE 1  60.0°C 
+- *TC2C* CORE 2  60.0°C 
+- *TG1D* 
+- *TM0P* FBDIMM Riser A incoming air Temp 
+- *TM0S* perhaps outgoing 
+- *TPCD* 
+
