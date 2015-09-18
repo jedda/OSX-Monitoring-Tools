@@ -14,11 +14,7 @@
 #       v1.0 - 20 Mar 2012
 #       Initial release.
 
-#       This script checks the expiry dates of all certificates in the /etc/certificates directory, and returns a warning if needed based on your defined number of days.
-#       Takes 1 argument - the minimum number of days between today and cert expiry to throw a warning:
-#
-#       check_certificate_expiry.sh -d 7 -p /etc/apache2/ssl
-#       Warns if a certificate is set to expire in the next 7 days.
+#       This script checks the expiry dates of all certificates in a path and returns a warning if needed based on your defined number of days.
 
 version="check_certificate_expiry v2.0 - 2015, Yvan Godard [godardyvan@gmail.com] - http://www.yvangodard.me"
 system=$(uname -a)
@@ -27,6 +23,7 @@ critical=0
 warning=0
 defaultPathToCheck=1
 recursivity=0
+systemOs=""
 scriptDir=$(dirname "${0}")
 scriptName=$(basename "${0}")
 scriptNameWithoutExt=$(echo "${scriptName}" | cut -f1 -d '.')
@@ -35,14 +32,14 @@ warningFile=$(mktemp /tmp/${scriptNameWithoutExt}_warningFile.XXXXX)
 criticalFile=$(mktemp /tmp/${scriptNameWithoutExt}_criticalFile.XXXXX)
 certificatesList=$(mktemp /tmp/${scriptNameWithoutExt}_certificatesList.XXXXX)
 
-cat ${system} | grep "Darwin" > /dev/null 2>&1
+echo ${system} | grep "Darwin" > /dev/null 2>&1
 if [[ $? -eq 0 ]]; then
 	systemOs="Mac"
 	certPath="/etc/certificates"
 	extension=".cert.pem"
 	recursivity=0
 fi
-cat ${system} | grep "Linux" > /dev/null 2>&1
+echo ${system} | grep "Linux" > /dev/null 2>&1
 if [[ $? -eq 0 ]]; then
 	systemOs="Linux"
 	certPath="/etc/apache2/ssl"
@@ -53,24 +50,30 @@ fi
 [[ ${systemOs} -ne "Linux" ]] && [[ ${systemOs} -ne "Mac" ]] && error 2 "CRITICAL - This tool doesn't works well on tis OS System!"
 
 help () {
-        printf "\n${version}\n"
-        printf "\nThis script checks the expiry dates of all certificates in a path.\n"
-        printf "\nDisclamer:\n"
-        printf "\nThis tool is provide without any support and guarantee.\n"
-        printf "\nSynopsis:\n"
-        printf "./$scriptName [-h] | -d <days within warning>\n" 
-        printf "                       [-p <path to check>] [-r] [-e <extension>]\n"
-        printf "\nTo print this help:\n"
-        printf "\t-h:                               prints this help then exit\n"
-        printf "\nMandatory options:\n"
-        printf "\t-d <days within warning>:         number of days within expiration to warn\n"
-        printf "\nOptional options:\n"
-        printf "\t-p <path to check>:               the full path of the directory to check\n"
-        printf "\t                                  (e.g.: '/etc/apache2/ssl/certs', default '${certPath}')\n"
-        printf "\t                                  if you want to check more than one directory, separate path with '%'\n"
-        printf "\t                                  (e.g.: '-p /etc/certs%/etc/certificates'\n"
-        printf "\t-r:                               check the path with recursivity\n"
-        printf "\t-e <extension>:                   extension of certificats to check (e.g.: '.certifs.pem', default: '${extension}')\n"
+        echo ""
+        echo "${version}"
+        echo "This script checks the expiry dates of all certificates in a path."
+        echo ""
+        echo "Disclamer:"
+        echo "This tool is provide without any support and guarantee."
+        echo ""
+        echo "Synopsis:"
+        echo "./${scriptName} [-h] | -d <days within warning>" 
+        echo "                              [-p <path to check>] [-r] [-e <extension>]"
+        echo ""
+        echo "To print this help:"
+        echo "   -h:                        prints this help then exit"
+        echo ""
+        echo "Mandatory options:"
+        echo "   -d <days within warning>:  number of days within expiration to warn"
+        echo ""
+        echo "Optional options:"
+        echo "   -p <path to check>:        the full path of the directory to check"
+        echo "                              (e.g.: '/etc/apache2/ssl/certs', default '${certPath}')"
+        echo "                              if you want to check more than one directory, separate path with '%'"
+        echo "                              (e.g.: '-p /etc/certs\%/etc/certificates'"
+        echo "   -r:                        check the path with recursivity"
+        echo "   -e <extension>:            extension of certificats to check (e.g.: '-e .certifs.pem', default: '${extension}')"
         alldone 0
 }
 
@@ -83,7 +86,7 @@ function alldone () {
 }
 
 function error () {
-        [[ ! -z ${2} ]] && printf ${2}
+        [[ ! -z ${2} ]] && echo ${2}
         alldone ${1}
 }
 
@@ -121,8 +124,8 @@ echo ${days} | grep "^[ [:digit:] ]*$" > /dev/null 2>&1
 for directoryToCheck in $(cat ${pathToCheck})
 do
 	if [[ -d ${directoryToCheck} ]]; then
-		[[ ${recursivity} -eq 1 ]] && find ${directoryToCheck%/} -type f -name "${extension}" >> ${certificatesList}
-		[[ ${recursivity} -eq 0 ]] && find ${directoryToCheck%/} -type f -name "${extension}" -maxdepth 1 >> ${certificatesList}
+		[[ ${recursivity} -eq 1 ]] && find ${directoryToCheck%/} -type f -name "*${extension}" >> ${certificatesList}
+		[[ ${recursivity} -eq 0 ]] && find ${directoryToCheck%/} -maxdepth 1 -type f -name "*${extension}" >> ${certificatesList}
 	fi
 done
 
@@ -137,8 +140,24 @@ do
             printf "> ${certificate} could not be loaded by openssl\n" >> ${criticalFile}
             critical=1
         fi
-        notAfter=$(echo ${certDates} | awk -F notAfter= '{print $NF}')     
-        expiryDate=$(date --date="${notAfter}" "+%s")
+        notAfter=$(echo ${certDates} | awk -F notAfter= '{print $NF}')
+        if [[ ${systemOs} == "Mac" ]]; then
+        	date -j -f "%b %e %T %Y %Z" "${notAfter}" "+%s" > /dev/null 2>&1
+        	if [[ $? -ne 0 ]]; then
+        		printf "> ${certificate} - expiry date could not be found by openssl\n" >> ${warningFile}
+        		warning=1
+        	else
+        		expiryDate=$(date -j -f "%b %e %T %Y %Z" "${notAfter}" "+%s")
+        	fi
+        elif [[ ${systemOs} == "Linux" ]]; then
+        	date --date="${notAfter}" "+%s" > /dev/null 2>&1
+        	if [[ $? -ne 0 ]]; then
+        		printf "> ${certificate} - expiry date could not be found by openssl\n" >> ${warningFile}
+        		warning=1
+        	else
+        		expiryDate=$(date --date="${notAfter}" "+%s")
+        	fi
+        fi
         diff=$(( ${expiryDate} - ${currentDate} ))
         warnSeconds=$((${days} * 86400))
         if [[ "${diff}" -lt "0" ]]; then
@@ -155,14 +174,14 @@ do
 done
 
 if [[ ${critical} -eq "1" ]]; then
-        [[ ! -z $(cat ${criticalFile}) ]] && printf "\n-- CRITICAL --\n" && cat ${criticalFile}
+        [[ ! -z $(cat ${criticalFile}) ]] && printf "CRITICAL - See informations below" && printf "\n-- CRITICAL --\n" && cat ${criticalFile}
         [[ ! -z $(cat ${warningFile}) ]] && printf "\n-- WARNING --\n" && cat ${warningFile}
         alldone 2
 elif [[ ${warning} -eq "1" ]]; then
-        [[ ! -z $(cat ${warningFile}) ]] && printf "\n-- WARNING --\n" && cat ${warningFile}
+        [[ ! -z $(cat ${warningFile}) ]] && printf "WARNING - See informations below" && printf "\n-- WARNING --\n" && cat ${warningFile}
         alldone 1
 else
-        alldone 0 "OK - Certificates are valid.\n"
+        error 0 "OK - Certificates are valid."
 fi
 
 alldone 0
