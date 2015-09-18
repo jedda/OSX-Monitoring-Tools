@@ -38,12 +38,14 @@
 #	-w		Warning notification sound. The script will look for the text 'WARNING' in the notification title, and use this sound if found.
 #	-c		Critical notification sound. The script will look for the text 'CRITICAL' in the notification title, and use this sound if found.
 #	-o		OK notification sound. The script will look for the text 'OK' in the notification title, and use this sound if found.
+#       -e              Expire parameter , required for nofication priority 2
+#       -r              Retry parameter , required for nofication priority 2
 
 # 	Example:
 #	./notify_by_pushover.sh -u r5j7mjYjd -a noZ9KuR5T -s 'spacealarm' -t "server.pretendco.com" -m "DISK WARNING - free space: /dev/disk0s2 4784 MB"
 
 
-while getopts "u:a:t:m:p:s:w:c:o:" optionName; do
+while getopts "u:a:t:m:p:s:w:c:o:e:r" optionName; do
 case "$optionName" in
 u) userKey=( "$OPTARG" );;
 a) appToken=( "$OPTARG" );;
@@ -54,6 +56,8 @@ s) sound=( "$OPTARG" );;
 w) warnSound=( "$OPTARG" );;
 c) critSound=( "$OPTARG" );;
 o) okSound=( "$OPTARG" );;
+e) expire=( "$OPTARG" );;
+r) retry=( "$OPTARG" );;
 
 esac
 done
@@ -78,6 +82,8 @@ curl -F "token=$appToken" \
 -F "message=$message" \
 -F "sound=$sound" \
 -F "$priorityString" \
+-F "expire=$expire" \
+-F "retry=$retry" \
 https://api.pushover.net/1/messages
 
 exit 0
