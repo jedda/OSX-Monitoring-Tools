@@ -31,6 +31,10 @@ pathToCheck=$(mktemp /tmp/${scriptNameWithoutExt}_pathToCheck.XXXXX)
 warningFile=$(mktemp /tmp/${scriptNameWithoutExt}_warningFile.XXXXX)
 criticalFile=$(mktemp /tmp/${scriptNameWithoutExt}_criticalFile.XXXXX)
 certificatesList=$(mktemp /tmp/${scriptNameWithoutExt}_certificatesList.XXXXX)
+messageContent=$(mktemp /tmp/${scriptNameWithoutExt}_messageContent.XXXXX)
+numberExpiredCertificates=0
+numberWarningCertificates=0
+numberProblemCertificates=0
 
 echo ${system} | grep "Darwin" > /dev/null 2>&1
 if [[ $? -eq 0 ]]; then
@@ -82,6 +86,7 @@ function alldone () {
         [[ -e ${warningFile} ]] && rm ${warningFile}
         [[ -e ${pathToCheck} ]] && rm ${pathToCheck}
         [[ -e ${certificatesList} ]] && rm ${certificatesList}
+        [[ -e ${messageContent} ]] && rm ${messageContent}
         exit ${1}
 }
 
@@ -98,7 +103,7 @@ do
             h)	help="yes"
                 ;;
             d)  days=${OPTARG}
-                let optsCount=$optsCount+1
+                let optsCount=${optsCount}+1
                 ;;
             p)  [[ ! -z ${OPTARG} ]] && defaultPathToCheck=0 && echo ${OPTARG} | perl -p -e 's/%/\n/g' | perl -p -e 's/ //g' | awk '!x[$0]++' >> ${pathToCheck}
 				;;
@@ -138,6 +143,7 @@ do
         if [[ -z "$certDates" ]]; then
             # this cert could not be read.
             printf "> ${certificate} could not be loaded by openssl\n" >> ${criticalFile}
+            let numberProblemCertificates=${numberProblemCertificates}+1
             critical=1
         fi
         notAfter=$(echo ${certDates} | awk -F notAfter= '{print $NF}')
@@ -145,6 +151,7 @@ do
         	date -j -f "%b %e %T %Y %Z" "${notAfter}" "+%s" > /dev/null 2>&1
         	if [[ $? -ne 0 ]]; then
         		printf "> ${certificate} - expiry date could not be found by openssl\n" >> ${warningFile}
+                let numberProblemCertificates=${numberProblemCertificates}+1
         		warning=1
         	else
         		expiryDate=$(date -j -f "%b %e %T %Y %Z" "${notAfter}" "+%s")
@@ -153,6 +160,7 @@ do
         	date --date="${notAfter}" "+%s" > /dev/null 2>&1
         	if [[ $? -ne 0 ]]; then
         		printf "> ${certificate} - expiry date could not be found by openssl\n" >> ${warningFile}
+                let numberProblemCertificates=${numberProblemCertificates}+1
         		warning=1
         	else
         		expiryDate=$(date --date="${notAfter}" "+%s")
@@ -163,22 +171,37 @@ do
         if [[ "${diff}" -lt "0" ]]; then
             # this cert is has already expired! return critical status.
             printf "> ${certificate} has expired!\n" >> ${criticalFile}
+            let numberExpiredCertificates=${numberExpiredCertificates}+1
             critical=1
+
         elif [[ "${diff}" -lt "${warnSeconds}" ]]; then
             # this cert is expiring within the warning threshold. return warning status.
             delay=$((${diff} / 86400))
             printf "> ${certificate} will expire within the next ${days} days.\n" >> ${warningFile}
             printf "  delay until expiration : ${delay} day(s)\n" >> ${warningFile}
+            let numberWarningCertificates=${numberWarningCertificates}+1
             warning=1
         fi 
 done
 
+# Generate first line message for Centreon
+[[ ${numberExpiredCertificates} -eq 1 ]] && echo "1 certificate has expired" >> ${messageContent}
+[[ ${numberExpiredCertificates} -gt 1 ]] && echo "${numberExpiredCertificates} ceertificates had expired" >> ${messageContent}
+
+[[ ${numberProblemCertificates} -eq 1 ]] && echo "Problem to read 1 certificate" >> ${messageContent}
+[[ ${numberProblemCertificates} -gt 1 ]] && echo "Problem to read ${numberProblemCertificates} certificates" >> ${messageContent}
+
+[[ ${numberWarningCertificates} -eq 1 ]] && echo "1 certificate will expire within the next ${days} days" >> ${messageContent}
+[[ ${numberWarningCertificates} -gt 1 ]] && echo "${numberWarningCertificates} certificates will expire within the next ${days} days" >> ${messageContent}
+
+messageContentLine=$(cat ${messageContent} | perl -p -e 's/\n/ - /g' | awk 'sub( "...$", "" )')
+
 if [[ ${critical} -eq "1" ]]; then
-        [[ ! -z $(cat ${criticalFile}) ]] && printf "CRITICAL - See informations below" && printf "\n-- CRITICAL --\n" && cat ${criticalFile}
+        [[ ! -z $(cat ${criticalFile}) ]] && printf "CRITICAL - ${messageContentLine}" && printf "\n-- CRITICAL --\n" && cat ${criticalFile}
         [[ ! -z $(cat ${warningFile}) ]] && printf "\n-- WARNING --\n" && cat ${warningFile}
         alldone 2
 elif [[ ${warning} -eq "1" ]]; then
-        [[ ! -z $(cat ${warningFile}) ]] && printf "WARNING - See informations below" && printf "\n-- WARNING --\n" && cat ${warningFile}
+        [[ ! -z $(cat ${warningFile}) ]] && printf "WARNING - ${messageContentLine}" && printf "\n-- WARNING --\n" && cat ${warningFile}
         alldone 1
 else
         error 0 "OK - Certificates are valid."
