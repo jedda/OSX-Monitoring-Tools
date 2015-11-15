@@ -4,6 +4,9 @@
 #	by Jedda Wignall
 #	http://jedda.me
 
+# 	v1.2 - 26 Jul 2015 by Yvan GODARD / godardyvan@gmail.com / yvangodard.me
+# 	Add support to multi OS X versions (changeip isn't located in the same folder)
+
 #	v1.1 - 12 Aug 2013
 #	Significant re-work. Now also does a forward and reverse lookup to ensure server DNS is healthy.
 
@@ -13,8 +16,15 @@
 #	Simple script that makes sure the infamous changeip -checkhostname command returns a happy status.
 #	It then does a forward and reverse lookup of the returned hostname and IP adress to make sure that DNS is healthy.
 
-checkHostname=`sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/changeip -checkhostname`
+
+versionOSX=$(sw_vers -productVersion | awk -F '.' '{print $(NF-1)}')
 regex="s.+=.([0-9].+)..Cu.+=.([a-z0-9.-]+).D"
+
+if [[ ${versionOSX} -ge 7 ]]; then
+	checkHostname=`sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/changeip -checkhostname`
+elif [[ ${versionOSX} -le 6 ]]; then
+	checkHostname=`sudo /usr/sbin/changeip -checkhostname`
+fi
 
 if echo $checkHostname | grep -q "The names match."; then
 	[[ $checkHostname =~ $regex ]]
