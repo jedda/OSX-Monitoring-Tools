@@ -55,7 +55,12 @@ fi
 
 # Check to see if we're running Mavericks as Time Machine runs a little differently
 osVersion=`sw_vers -productVersion | grep -E -o "[0-9]+\.[0-9]"`
-isMavericks=`echo $osVersion '< 10.9' | bc -l`
+function version { echo "$@" | awk -F. '{ printf("%03d%03d\n", $1,$2); }'; }
+if [ "$(version "$osVersion")" -gt "$(version "$10.9")" ]; then
+    isMavericks=0
+else
+    isMavericks=1
+fi
 
 if [ $isMavericks -eq 0 ]
 then
